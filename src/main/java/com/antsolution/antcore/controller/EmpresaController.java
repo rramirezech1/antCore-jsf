@@ -4,38 +4,93 @@ package com.antsolution.antcore.controller;
 import com.antsolutions.antcore.ejb.EmpresaFacadeLocal;
 import com.antsolutions.antcore.model.Empresa;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
 
 @Named
 @ViewScoped
 public class EmpresaController implements Serializable {
     
+    private Empresa selected;
+    private Boolean deshabilitado = true;
+    private List<Empresa> listEmpresa = new ArrayList();
+       
     @EJB
     private EmpresaFacadeLocal empresaEJB;
-    private Empresa empresa;
     
+    public EmpresaController(){
+    }
+        
     @PostConstruct
     public void init(){
-        empresa = new Empresa();
+        buscarEmpresa();
     }
     
-    public void registrar(){
+    public void newEmpresa(){
+    
+        selected = new Empresa();
+        
+        selected.setNombreEmpresa("");
+    
+    
+    }
+    
+    public void guardar(){
         try {
-            empresaEJB.create(empresa);
+            empresaEJB.create(selected);
+            deshabilitado = true;
+            selected = null;
         
         } catch (Exception e){
         
         }
     }
+    
 
-    public Empresa getEmpresa() {
-        return empresa;
+     private void buscarEmpresa() {
+        listEmpresa = empresaEJB.findAll();
+    }
+   
+
+    public void onRowSelect(SelectEvent event) {
+        selected = (Empresa) event.getObject();
+        deshabilitado = false;
     }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+
+    public Empresa getSelected() {
+        if (selected == null){
+            selected = new Empresa();
+        }
+        return selected;
     }
+
+    public void setSelected(Empresa selected) {
+        if (selected != null && selected.getIdEmpresa() != null){
+            this.selected = selected;
+        }
+    }
+
+    public Boolean getDeshabilitado() {
+        return deshabilitado;
+    }
+
+    public void setDeshabilitado(Boolean deshabilitado) {
+        this.deshabilitado = deshabilitado;
+    }
+
+    public List<Empresa> getListEmpresa() {
+        return listEmpresa;
+    }
+
+    public void setListEmpresa(List<Empresa> listEmpresa) {
+        this.listEmpresa = listEmpresa;
+    }
+    
+   
 }
