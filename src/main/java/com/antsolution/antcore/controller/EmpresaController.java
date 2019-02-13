@@ -32,11 +32,9 @@ public class EmpresaController implements Serializable {
     }
     
     public void newEmpresa(){
-    
+        deshabilitado = false;
         selected = new Empresa();
-        
         selected.setNombreEmpresa("");
-    
     
     }
     

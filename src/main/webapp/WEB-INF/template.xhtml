@@ -27,7 +27,9 @@
                 <ui:include src="./menu.xhtml" />
                 
                 <div class="layout-content">
-                    <ui:insert name="content"/>
+                    <h:form id="frm">
+                        <ui:insert name="content"/>
+                    </h:form>
                 </div>
                 
                 <ui:include src="./footer.xhtml" />
