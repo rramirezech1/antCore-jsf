@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <p:menubar>  
+                        <p:menuitem value="Nuevo"  ajax="true"  action="#{empresaController.newEmpresa}"
+                                    update="formulario_empresa" icon="fa fa-file-o"/>  
+                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="true"/>
+                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{empresaController.guardar}" 
+                                    disabled="false" update="listaEntidades formulario_entidad" />
+                        <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
+                        <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
+
+                        <f:facet  name="options" class="centradoVertical">  
+                            <p:commandButton icon="fa fa-sign-out" value="Salir" action="#{personaController.logout}"/>
+                        </f:facet>
+                    </p:menubar>
+
+                    <h3>
+                        <i class="fa fa-university blue" style="font-size: 16px;"></i>
+                        <p:spacer width="10" height="8"/>
+                        <p:outputLabel value="Registro de Empresas" />
+                    </h3>
+
+                    <p:panelGrid id="formulario_empresa" columns="2" columnClasses="col2_label,col10" 
+                                 style="width: 100%; border:0px none; background-color:transparent;"
+                                 styleClass="form-group ui-panelgrid-blank">
+                        <h:outputLabel value="Código:" />
+                        <p:inputText maxlength="5" required="true" value="#{empresaController.selected.idEmpresa}" id="idEmpresa" disabled="#{empresaController.deshabilitado}"/>  
+                        <h:outputLabel value="Nombre:" />
+                        <p:inputText size="70" required="true" value="#{empresaController.selected.nombreEmpresa}" id="nombreEmpresa" disabled="#{empresaController.deshabilitado}"/>  
+                        <h:outputLabel value="Dirección:" />
+                        <p:inputText size="70" required="true" value="#{empresaController.selected.direccionEmpresa}" id="nombreContacto" disabled="#{empresaController.deshabilitado}"/>  
+                        <h:outputLabel value="Contacto:"/>
+                        <p:inputText size="70" required="true" value="#{empresaController.selected.contactoEmpresa}" id="email" disabled="#{empresaController.deshabilitado}"/>  
+                        <h:outputLabel value="Télefono:"/>
+                        <p:inputMask mask="99999999" size="8" required="true" value="#{empresaController.selected.telContactoEmpresa}" id="telefonoEnt" disabled="#{empresaController.deshabilitado}"/>  
+                        <h:outputLabel value=" Correo Electronico:"/>
+                        <p:inputText size="25" value="#{empresaController.selected.EMailContacto}" id="numeroCuenta" disabled="#{empresaController.deshabilitado}"/>  
+                    </p:panelGrid>
+                </div>
+                <div class="card clearfix">
+                    <h1>
+                        <i class="fa fa-list-ol verde" style="font-size: 16px;"></i>
+                        <p:spacer width="10"/>
+                        <h:outputText value="Lista de Entidades"/>
+                    </h1>
+                    <p:dataTable id="listaEntidades" var="entidad" value="#{empresaController.listEmpresa}" rowKey="#{entidad.idEmpresa}" 
+                                 selectionMode="single" selection="#{empresaController.selected}" scrollable="true" scrollHeight="400"> 
+
+                        <p:ajax event="rowSelect" listener="#{empresaController.onRowSelect}"   
+                                update="formulario_entidad" />
+                        <p:column headerText="Código" width="35">  
+                            <h:outputText value="#{entidad.idEmpresa}" />  
+                        </p:column>  
+
+                        <p:column headerText="Nombre" width="180">  
+                            <h:outputText value="#{entidad.nombreEmpresa}" />  
+                        </p:column>  
+
+                        <p:column headerText="Contacto" width="150">  
+                            <h:outputText value="#{entidad.contactoEmpresa}" />  
+                        </p:column>  
+
+                        <p:column headerText="e-Mail" width="200">
+                            <h:outputText value="#{entidad.EMailContacto}" />  
+                        </p:column>  
+
+                        <p:column headerText="Télefono" width="50">  
+                            <h:outputText value="#{entidad.telContactoEmpresa}" />  
+                        </p:column>
+                    </p:dataTable>  
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
