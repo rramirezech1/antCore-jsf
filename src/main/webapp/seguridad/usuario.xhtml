@@ -6,16 +6,15 @@
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="content">
-        <h:form>
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="card">
                     <p:menubar>  
-                        <p:menuitem value="Nuevo"  ajax="true"  action="#{empresaController.newEmpresa}"
-                                    update="formularioEmpresa" icon="fa fa-file-o"/>  
+                        <p:menuitem value="Nuevo"  ajax="true"  action="#{usuarioSeguridadController.newUsuarioSeguridad}"
+                                    update="frm:formularioUsuario" icon="fa fa-file-o"/>  
                         <p:menuitem value="Modificar" icon="fa fa-edit" disabled="true"/>
-                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{empresaController.guardar}" 
-                                    disabled="false" update="listaEmpresas formularioEmpresa" />
+                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{usuarioSeguridadController.guardar}" 
+                                    disabled="false" update="frm:listaUsuarios frm:formularioUsuario" />
                         <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
                         <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
 
@@ -27,24 +26,24 @@
                     <h3>
                         <i class="fa fa-university blue" style="font-size: 16px;"></i>
                         <p:spacer width="10" height="8"/>
-                        <p:outputLabel value="Registro de Empresas" />
+                        <p:outputLabel value="Registro de Usuarios" />
                     </h3>
 
-                    <p:panelGrid id="formularioEmpresa" columns="2" columnClasses="col2_label,col10" 
+                    <p:panelGrid id="formularioUsuario" columns="2" columnClasses="col2_label,col10" 
                                  style="width: 100%; border:0px none; background-color:transparent;"
                                  styleClass="form-group ui-panelgrid-blank">
-                        <h:outputLabel value="Código:" />
-                        <p:inputText maxlength="5" required="true" value="#{empresaController.selected.idEmpresa}" id="idEmpresa" disabled="#{empresaController.deshabilitado}"/>  
-                        <h:outputLabel value="Nombre:" />
-                        <p:inputText size="70" required="true" value="#{empresaController.selected.nombreEmpresa}" id="nombreEmpresa" disabled="#{empresaController.deshabilitado}"/>  
-                        <h:outputLabel value="Dirección:" />
-                        <p:inputText size="70" required="true" value="#{empresaController.selected.direccionEmpresa}" id="direccionEmpresa" disabled="#{empresaController.deshabilitado}"/>  
-                        <h:outputLabel value="Contacto:"/>
-                        <p:inputText size="70" required="true" value="#{empresaController.selected.contactoEmpresa}" id="nombreContacto" disabled="#{empresaController.deshabilitado}"/>  
-                        <h:outputLabel value="Télefono:"/>
-                        <p:inputMask mask="99999999" size="8" required="true" value="#{empresaController.selected.telContactoEmpresa}" id="telContacto" disabled="#{empresaController.deshabilitado}"/>  
-                        <h:outputLabel value=" Correo Electronico:"/>
-                        <p:inputText size="25" value="#{empresaController.selected.EMailContacto}" id="EMailContacto" disabled="#{empresaController.deshabilitado}"/>  
+                        <h:outputLabel value="Código:" for="idUsuario"/>
+                        <p:inputText maxlength="5" required="true" value="#{usuarioSeguridadController.selected.idUsuario}" id="idUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
+                        <h:outputLabel value="Nombre:" for="nombreUsuario"/>
+                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.nombreUsuario}" id="nombreUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
+                        <h:outputLabel value="Apellido:" for="apellidoUsuario"/>
+                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.apellidoUsuario}" id="apellidoUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
+                        <h:outputLabel value="Usuario:" for="usuarioLogin"/>
+                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.usuarioLogin}" id="usuarioLogin" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
+                        <h:outputLabel value="Contraseña:" for="usuarioPassword1"/>
+                        <p:password size="50" required="true" value="#{usuarioSeguridadController.selected.usuarioPassword}" id="usuarioPassword1" disabled="#{usuarioSeguridadController.deshabilitado}" match="usuarioPassword2" feedback="true"/>  
+                        <h:outputLabel value="Repetir Contraseña:" for="usuarioPassword2"/>
+                        <p:password size="50" required="true"  id="usuarioPassword2" disabled="#{usuarioSeguridadController.deshabilitado}" feedback="true"/>  
                     </p:panelGrid>
                   
                 </div>
@@ -52,36 +51,32 @@
                     <h1>
                         <i class="fa fa-list-ol verde" style="font-size: 16px;"></i>
                         <p:spacer width="10"/>
-                        <h:outputText value="Lista de Empresas"/>
+                        <h:outputText value="Lista de Usuarios"/>
                     </h1>
-                    <p:dataTable id="listaEmpresas" var="entidad" value="#{empresaController.listEmpresa}" rowKey="#{entidad.idEmpresa}" 
-                                 selectionMode="single" selection="#{empresaController.selected}" scrollable="true" scrollHeight="400"> 
+                    <p:dataTable id="listaUsuarios" var="entidad" value="#{usuarioSeguridadController.listUsuarioSeguridad}" rowKey="#{entidad.idUsuario}" 
+                                 selectionMode="single" selection="#{usuarioSeguridadController.selected}" scrollable="true" scrollHeight="400"> 
 
-                        <p:ajax event="rowSelect" listener="#{empresaController.onRowSelect}" update="formularioEmpresa" />
+                        <p:ajax event="rowSelect" listener="#{usuarioSeguridadController.onRowSelect}" update="frm:formularioUsuario" />
                         <p:column headerText="Código" width="35">  
-                            <h:outputText value="#{entidad.idEmpresa}" />  
+                            <h:outputText value="#{entidad.idUsuario}" />  
                         </p:column>  
 
-                        <p:column headerText="Nombre" width="180">  
-                            <h:outputText value="#{entidad.nombreEmpresa}" />  
+                        <p:column headerText="Nombre" width="50">  
+                            <h:outputText value="#{entidad.nombreUsuario}" />  
+                        </p:column>  
+                        
+                        <p:column headerText="Apellido" width="50">  
+                            <h:outputText value="#{entidad.apellidoUsuario}" />  
                         </p:column>  
 
-                        <p:column headerText="Contacto" width="150">  
-                            <h:outputText value="#{entidad.contactoEmpresa}" />  
+                        <p:column headerText="Usuario" width="50">  
+                            <h:outputText value="#{entidad.usuarioLogin}" />  
                         </p:column>  
 
-                        <p:column headerText="e-Mail" width="200">
-                            <h:outputText value="#{entidad.EMailContacto}" />  
-                        </p:column>  
-
-                        <p:column headerText="Télefono" width="50">  
-                            <h:outputText value="#{entidad.telContactoEmpresa}" />  
-                        </p:column>
                     </p:dataTable> 
                 </div>
             </div>
-        </div>
-        </h:form>      
+        </div>  
     </ui:define>
 
 </ui:composition>

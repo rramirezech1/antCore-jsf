@@ -16,12 +16,12 @@ import org.primefaces.event.SelectEvent;
 @ViewScoped
 public class UsuarioSeguridadController implements Serializable{
     
+    @EJB
+    private UsuarioSeguridadFacadeLocal usuarioSeguridadEJB;
+    
     private UsuarioSeguridad selected;
     private Boolean deshabilitado = true;
     private List<UsuarioSeguridad> listUsuarioSeguridad = new ArrayList();
-       
-    @EJB
-    private UsuarioSeguridadFacadeLocal usuarioSeguridadEJB;
     
     public UsuarioSeguridadController(){
     }
@@ -45,7 +45,7 @@ public class UsuarioSeguridadController implements Serializable{
             selected = null;
         
         } catch (Exception e){
-        
+            
         }
     }
     
