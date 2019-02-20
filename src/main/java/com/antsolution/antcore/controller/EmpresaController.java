@@ -32,17 +32,16 @@ public class EmpresaController implements Serializable {
     }
     
     public void newEmpresa(){
-    
+        deshabilitado = false;
         selected = new Empresa();
-        
         selected.setNombreEmpresa("");
-    
     
     }
     
     public void guardar(){
         try {
             empresaEJB.create(selected);
+            listEmpresa.add(selected);
             deshabilitado = true;
             selected = null;
         
