@@ -1,4 +1,4 @@
-package com.antsolution.antcore.controller;
+package com.antsolution.antcore.controller.seguridad;
 
 import com.antsolutions.antcore.ejb.UsuarioSeguridadFacadeLocal;
 import com.antsolutions.antcore.model.UsuarioSeguridad;
@@ -46,6 +46,29 @@ public class UsuarioSeguridadController implements Serializable {
 
         } catch (Exception e) {
 
+        }
+    }
+    
+     public void modificar(){
+        try {
+            usuarioSeguridadEJB.edit(selected);
+            deshabilitado = true;
+            selected = null;
+        
+        } catch (Exception e){
+        
+        }
+    }
+    
+    public void eliminar(){
+        try {
+            usuarioSeguridadEJB.remove(selected);
+            listUsuarioSeguridad.remove(selected);
+            deshabilitado = true;
+            selected = null;
+        
+        } catch (Exception e){
+        
         }
     }
 

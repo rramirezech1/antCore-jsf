@@ -12,9 +12,12 @@
                     <p:menubar>  
                         <p:menuitem value="Nuevo"  ajax="true"  action="#{usuarioSeguridadController.newUsuarioSeguridad}"
                                     update="frm:formularioUsuario" icon="fa fa-file-o"/>  
-                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="true"/>
                         <p:menuitem value="Guardar" icon="fa fa-save" action="#{usuarioSeguridadController.guardar}" 
                                     disabled="false" update="frm:listaUsuarios frm:formularioUsuario" />
+                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="false" action="#{usuarioSeguridadController.modificar}"
+                                    update="frm:listaUsuarios frm:formularioUsuario"/>
+                        <p:menuitem value="Eliminar" icon="fa fa-eraser" disabled="false" action="#{usuarioSeguridadControlle.eliminar}"
+                                    update="frm:listaUsuarios frm:formularioUsuario"/>                        
                         <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
                         <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
 
@@ -24,7 +27,7 @@
                     </p:menubar> 
                     
                     <h3>
-                        <i class="fa fa-university blue" style="font-size: 16px;"></i>
+                        <i class="fa fa-user-circle-o" style="font-size: 16px;"></i>
                         <p:spacer width="10" height="8"/>
                         <p:outputLabel value="Registro de Usuarios" />
                     </h3>

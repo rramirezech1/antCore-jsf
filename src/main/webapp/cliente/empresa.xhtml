@@ -9,12 +9,15 @@
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="card">
-                    <p:menubar>  
+                    <p:menubar id="menuEmpresa">  
                         <p:menuitem value="Nuevo"  ajax="true"  action="#{empresaController.newEmpresa}"
-                                    update="formularioEmpresa" icon="fa fa-file-o"/>  
-                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="true"/>
+                                    update="frm:formularioEmpresa" icon="fa fa-file-o"/>  
                         <p:menuitem value="Guardar" icon="fa fa-save" action="#{empresaController.guardar}" 
-                                    disabled="false" update="listaEmpresas formularioEmpresa" />
+                                    disabled="#{usuarioEmpresa.deshabilitado}" update="frm:listaEmpresas frm:formularioEmpresa" />
+                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="#{usuarioEmpresa.deshabilitado}" action="#{empresaController.modificar}"
+                                    update="frm:listaEmpresas frm:formularioEmpresa"/>
+                        <p:menuitem value="Eliminar" icon="fa fa-eraser" disabled="#{usuarioEmpresa.deshabilitado}" action="#{empresaController.eliminar}"
+                                    update="frm:listaEmpresas frm:formularioEmpresa"/>
                         <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
                         <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
 
@@ -33,7 +36,7 @@
                                  style="width: 100%; border:0px none; background-color:transparent;"
                                  styleClass="form-group ui-panelgrid-blank">
                         <h:outputLabel value="Código:" />
-                        <p:inputText maxlength="5" required="true" value="#{empresaController.selected.idEmpresa}" id="idEmpresa" disabled="#{empresaController.deshabilitado}"/>  
+                        <p:inputText maxlength="5" value="#{empresaController.selected.idEmpresa}" id="idEmpresa" disabled="#{empresaController.deshabilitado}"/>  
                         <h:outputLabel value="Nombre:" />
                         <p:inputText size="70" required="true" value="#{empresaController.selected.nombreEmpresa}" id="nombreEmpresa" disabled="#{empresaController.deshabilitado}"/>  
                         <h:outputLabel value="Dirección:" />
@@ -56,7 +59,7 @@
                     <p:dataTable id="listaEmpresas" var="entidad" value="#{empresaController.listEmpresa}" rowKey="#{entidad.idEmpresa}" 
                                  selectionMode="single" selection="#{empresaController.selected}" scrollable="true" scrollHeight="400"> 
 
-                        <p:ajax event="rowSelect" listener="#{empresaController.onRowSelect}" update="frm:formularioEmpresa"/>
+                        <p:ajax event="rowSelect" listener="#{empresaController.onRowSelect}" update="frm:formularioEmpresa frm:menuEmpresa"/>
                         <p:column headerText="Código" width="35">  
                             <h:outputText value="#{entidad.idEmpresa}" />  
                         </p:column>  

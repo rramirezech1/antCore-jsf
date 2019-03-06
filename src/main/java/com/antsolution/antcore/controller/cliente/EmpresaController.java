@@ -1,5 +1,5 @@
 
-package com.antsolution.antcore.controller;
+package com.antsolution.antcore.controller.cliente;
 
 import com.antsolutions.antcore.ejb.EmpresaFacadeLocal;
 import com.antsolutions.antcore.model.Empresa;
@@ -42,6 +42,29 @@ public class EmpresaController implements Serializable {
         try {
             empresaEJB.create(selected);
             listEmpresa.add(selected);
+            deshabilitado = true;
+            selected = null;
+        
+        } catch (Exception e){
+        
+        }
+    }
+    
+    public void modificar(){
+        try {
+            empresaEJB.edit(selected);
+            deshabilitado = true;
+            selected = null;
+        
+        } catch (Exception e){
+        
+        }
+    }
+    
+    public void eliminar(){
+        try {
+            empresaEJB.remove(selected);
+            listEmpresa.remove(selected);
             deshabilitado = true;
             selected = null;
         
