@@ -10,13 +10,13 @@
             <div class="ui-g-12">
                 <div class="card">
                     <p:menubar id="menuSucursal">  
-                        <p:menuitem value="Nuevo"  ajax="true"  action="#{clienteController.newSucursal}"
+                        <p:menuitem value="Nuevo"  ajax="true"  action="#{sucursalController.newSucursal}"
                                     update="frm:formularioSucursal" icon="fa fa-file-o"/>  
-                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{clienteController.guardar}" 
-                                    disabled="#{clienteController.deshabilitado}" update="frm:listaSucursales frm:formularioSucursal" />
-                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="#{clienteController.deshabilitado}" action="#{clienteController.modificar}"
+                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{sucursalController.guardar}" 
+                                    disabled="#{sucursalController.deshabilitado}" update="frm:listaSucursales frm:formularioSucursal" />
+                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="#{sucursalController.deshabilitado}" action="#{sucursalController.modificar}"
                                     update="frm:listaSucursales frm:formularioSucursal"/>
-                        <p:menuitem value="Eliminar" icon="fa fa-eraser" disabled="#{clienteController.deshabilitado}" action="#{clienteController.eliminar}"
+                        <p:menuitem value="Eliminar" icon="fa fa-eraser" disabled="#{sucursalController.deshabilitado}" action="#{sucursalController.eliminar}"
                                     update="frm:listaSucursales frm:formularioSucursal"/>
                         <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
                         <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
@@ -36,21 +36,21 @@
                                  style="width: 100%; border:0px none; background-color:transparent;"
                                  styleClass="form-group ui-panelgrid-blank">
                         <h:outputLabel value="Código:" />
-                        <p:inputText maxlength="5" value="#{clienteController.selected.idSucursal}" id="idSucursal" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputText maxlength="5" value="#{sucursalController.selected.idSucursal}" id="idSucursal" disabled="true"/>  
                         <h:outputLabel value="Nombre:" />
-                        <p:inputText size="70" required="true" value="#{clienteController.selected.nombreSucursal}" id="nombreSucursal" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputText size="70" required="true" value="#{sucursalController.selected.nombreSucursal}" id="nombreSucursal" disabled="#{sucursalController.deshabilitado}"/>  
                         <h:outputLabel value="Dirección:" />
-                        <p:inputText size="70" required="true" value="#{clienteController.selected.direccionSucursal}" id="direccionSucursal" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputText size="70" required="true" value="#{sucursalController.selected.direccionSucursal}" id="direccionSucursal" disabled="#{sucursalController.deshabilitado}"/>  
                         <h:outputLabel value="Contacto:"/>
-                        <p:inputText size="70" required="true" value="#{clienteController.selected.contactoSucursal}" id="nombreContacto" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputText size="70" required="true" value="#{sucursalController.selected.contactoSucursal}" id="nombreContacto" disabled="#{sucursalController.deshabilitado}"/>  
                         <h:outputLabel value="Télefono:"/>
-                        <p:inputMask mask="99999999" size="8" required="true" value="#{clienteController.selected.telContactoSucursal}" id="telContacto" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputMask mask="99999999" size="8" required="true" value="#{sucursalController.selected.telContactoSucursal}" id="telContacto" disabled="#{sucursalController.deshabilitado}"/>  
                         <h:outputLabel value="Correo Electronico:"/>
-                        <p:inputText size="25" value="#{clienteController.selected.EMailContactoSucursal}" id="EMailContactoSucursal" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputText size="25" value="#{sucursalController.selected.EMailContactoSucursal}" id="EMailContactoSucursal" disabled="#{sucursalController.deshabilitado}"/>  
                         <h:outputLabel value="Empresa:"/>
-                        <p:selectOneMenu style="width:250px" value="#{clienteController.selected.idEmpresa}" id="idEmpresaSucursal" disabled="#{clienteController.deshabilitado}">
+                        <p:selectOneMenu style="width:250px" value="#{sucursalController.selected.idEmpresa}" id="idEmpresaSucursal" disabled="#{sucursalController.deshabilitado}">
                              <f:selectItem itemLabel="Seleccione empresa" itemValue="" noSelectionOption="true" />
-                             <f:selectItems value="#{clienteController.listEmpresa}" />
+                             <f:selectItems value="#{sucursalController.listEmpresa}" var="emp" itemValue="#{emp.idEmpresa}" itemLabel="#{emp.nombreEmpresa}"/>
                         </p:selectOneMenu>                            
                     </p:panelGrid>
                   
@@ -61,10 +61,10 @@
                         <p:spacer width="10"/>
                         <h:outputText value="Lista de Sucursales"/>
                     </h1>
-                    <p:dataTable id="listaSucursales" var="entidad" value="#{clienteController.listSucursal}" rowKey="#{entidad.idSucursal}" 
-                                 selectionMode="single" selection="#{clienteController.selected}" scrollable="true" scrollHeight="400"> 
+                    <p:dataTable id="listaSucursales" var="entidad" value="#{sucursalController.listSucursal}" rowKey="#{entidad.idSucursal}" 
+                                 selectionMode="single" selection="#{sucursalController.selected}" scrollable="true" scrollHeight="400"> 
 
-                        <p:ajax event="rowSelect" listener="#{clienteController.onRowSelect}" update="frm:formularioSucursal frm:menuSucursal"/>
+                        <p:ajax event="rowSelect" listener="#{sucursalController.onRowSelect}" update="frm:formularioSucursal frm:menuSucursal"/>
                         <p:column headerText="Código" width="35">  
                             <h:outputText value="#{entidad.idSucursal}" />  
                         </p:column>  

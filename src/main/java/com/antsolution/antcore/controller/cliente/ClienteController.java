@@ -45,6 +45,7 @@ public class ClienteController implements Serializable {
     @PostConstruct
     public void init(){
         buscarCliente();
+        listPais =  paisEJB.findAll();  
         listDepartamento =  departamentoEJB.findAll();        
     }
     
@@ -100,8 +101,8 @@ public class ClienteController implements Serializable {
     }
     
     
-    public void onPaisChange(Pais idPais) {
-         listDepartamento = departamentoEJB.findByPais(idPais);
+    public void onPaisChange() {
+         listDepartamento = departamentoEJB.findByPais(selected.getIdPais());
     }
    
 

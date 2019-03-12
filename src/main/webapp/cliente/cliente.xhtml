@@ -32,31 +32,33 @@
                         <p:outputLabel value="Registro de Clientes" />
                     </h3>
 
-                    <p:panelGrid id="formularioCliente" columns="2" columnClasses="col2_label,col10" 
+                    <p:panelGrid id="formularioCliente" columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" 
                                  style="width: 100%; border:0px none; background-color:transparent;"
-                                 styleClass="form-group ui-panelgrid-blank">
+                                 styleClass="form-group ui-panelgrid-blank">    
                         <h:outputLabel value="Código:" />
-                        <p:inputText maxlength="5" value="#{clienteController.selected.idCliente}" id="idCliente" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputText maxlength="5" value="#{clienteController.selected.idCliente}" id="idCliente" disabled="true"/>  
+                        <p:spacer width="1"/>
+                        <p:spacer width="1"/>
                         <h:outputLabel value="Nombres:" />
-                        <p:inputText size="70" required="true" value="#{clienteController.selected.nombreCliente}" id="nombreCliente" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputText size="50" required="true" value="#{clienteController.selected.nombreCliente}" id="nombreCliente" disabled="#{clienteController.deshabilitado}"/>  
                         <h:outputLabel value="Apellidos:" />
-                        <p:inputText size="70" required="true" value="#{clienteController.selected.apellidoCliente}" id="apellidoCliente" disabled="#{clienteController.deshabilitado}"/> 
+                        <p:inputText size="50" required="true" value="#{clienteController.selected.apellidoCliente}" id="apellidoCliente" disabled="#{clienteController.deshabilitado}"/> 
                         <h:outputLabel value="Dirección:" />
-                        <p:inputText size="70" required="true" value="#{clienteController.selected.direccionCliente}" id="direccionCliente" disabled="#{clienteController.deshabilitado}"/>  
+                        <p:inputText  size="50" required="true" value="#{clienteController.selected.direccionCliente}" id="direccionCliente" disabled="#{clienteController.deshabilitado}"/>  
                         <h:outputLabel value="Pais"/>
-                        <p:selectOneMenu style="width:250px" id="idPaisCliente" disabled="#{clienteController.deshabilitado}" value="#{clienteController.selected.idPais}">
+                        <p:selectOneMenu style="width:300px" id="idPaisCliente" disabled="#{clienteController.deshabilitado}" value="#{clienteController.selected.idPais.idPais}">
+                             <p:ajax listener="#{clienteController.onPaisChange}" update="idDepartamentoCliente" />
                              <f:selectItem itemLabel="Seleccione País" itemValue="" noSelectionOption="true" />
                              <f:selectItems value="#{clienteController.listPais}" var="pais" itemValue="#{pais.idPais}" itemLabel="#{pais.nombrePais}" />
-                             <p:ajax listener="#{clienteController.onPaisChange(pais)}" update="idDepartamentoCliente" />
                         </p:selectOneMenu>   
                         <h:outputLabel value="Departamento"/>
-                        <p:selectOneMenu style="width:250px" id="idDepartamentoCliente" disabled="#{clienteController.deshabilitado}">
+                        <p:selectOneMenu style="width:300px" id="idDepartamentoCliente" disabled="#{clienteController.deshabilitado}">
                              <f:selectItem itemLabel="Seleccione Departamento" itemValue="" noSelectionOption="true" />
                              <f:selectItems value="#{clienteController.listDepartamento}" var="depto" itemValue="#{depto.idDepartamento}" itemLabel="#{depto.nombreDepartamento}" />
                              <p:ajax listener="#{clienteController.onDeptoChange()}" update="idMunicipioCliente" />
                         </p:selectOneMenu>   
                         <h:outputLabel value="Municipio"/>
-                        <p:selectOneMenu style="width:250px" value="#{clienteController.selected.idMuncipio}" id="idMunicipioCliente" disabled="#{clienteController.deshabilitado}">
+                        <p:selectOneMenu style="width:300px" value="#{clienteController.selected.idMuncipio}" id="idMunicipioCliente" disabled="#{clienteController.deshabilitado}">
                              <f:selectItem itemLabel="Seleccione Municipio" itemValue="" noSelectionOption="true" />
                              <f:selectItems value="#{clienteController.listMunicipio}" var="muni" itemValue="#{muni.idMunicipio}" itemLabel="#{muni.nombreMunicipio}"/>
                         </p:selectOneMenu>   

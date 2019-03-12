@@ -1,6 +1,7 @@
 
 package com.antsolution.antcore.controller.cliente;
 
+import com.antsolutions.antcore.ejb.EmpresaFacadeLocal;
 import com.antsolutions.antcore.ejb.SucursalFacadeLocal;
 import com.antsolutions.antcore.model.Sucursal;
 import com.antsolutions.antcore.model.Empresa;
@@ -25,11 +26,15 @@ public class SucursalController implements Serializable {
     @EJB
     private SucursalFacadeLocal sucursalEJB;
     
+    @EJB
+    private EmpresaFacadeLocal empresaEJB;
+    
     public SucursalController(){
     }
         
     @PostConstruct
     public void init(){
+        listEmpresa =  empresaEJB.findAll();  
         buscarSucursal();
     }
     
