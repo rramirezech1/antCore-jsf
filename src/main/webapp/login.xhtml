@@ -16,7 +16,7 @@
     </h:head>
 
     <h:body styleClass="login-body">
-        <h:form>
+        <h:form id="loginForm" onsubmit="document.getElementById('loginForm').action='j_security_check';" prependId="false">
             <div class="login-panel ui-fluid">
                 <div class="ui-g">
                     <div class="ui-g-12 logo-container">
@@ -25,16 +25,16 @@
                         <!--h2>¡Bienvenido!</h2-->
                     </div>
                     <div class="ui-g-12">
-                        <p:outputLabel for="username" value="Usuario" />
+                        <p:outputLabel for="j_username" value="Usuario" />
                         <div class="input-wrapper">
-                            <p:inputText id="username" placeholder="Usuario"/>
+                            <p:inputText id="j_username" placeholder="Usuario"/>
                             <i class="fa fa-user" />
                         </div>
                     </div>
                     <div class="ui-g-12">
-                        <p:outputLabel for="password" value="Contraseña" />
+                        <p:outputLabel for="j_password" value="Contraseña" />
                         <div class="input-wrapper">
-                            <p:password id="password" placeholder="Contraseña" feedback="false" />
+                            <p:password id="j_password" placeholder="Contraseña" feedback="false" />
                             <i class="fa fa-lock" />
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         
                     </div>
                     <div class="ui-g-12 button-container">
-                        <p:button outcome="/inicio" value="Ingresar" styleClass="blue-btn raised-btn"/>
+                        <p:commandButton id="submit" value="Ingresar" styleClass="blue-btn raised-btn" ajax="false"/>
                     </div>
                     
                     <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="paradise-layout" />

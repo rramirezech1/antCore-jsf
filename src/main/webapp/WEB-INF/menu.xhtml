@@ -24,13 +24,19 @@
                                 <p:menuitem id="pm_cliente" value="Clientes" icon="fa fa-users" outcome="/cliente/cliente" />
                             </p:submenu>
                             <p:submenu id="pm_ventas" label="Ordenes y Ventas" icon="fa fa-briefcase">
+                                <p:menuitem id="pm_orden_produccio" value="Ordenes de Producción" icon="fa fa-university blue" outcome="/produccion/orden" />
                             </p:submenu>
                             <p:submenu id="pm_produccion" label="Gestión de la  producción" icon="fa fa-cog">
+                                <p:menuitem id="pm_cat_productos" value="Catalogo de producto" icon="fa fa-university blue" outcome="/produccion/producto" />
+                                <p:menuitem id="pm_inventario" value="Inventario de productos" icon="fa fa-home" outcome="/produccion/inventario"/>
                             </p:submenu>
-                            <p:submenu id="pm_facturacion" label="Facturación" icon="fa fa-bar-chart">
+                            <p:submenu id="pm_ventanilla" label="Ventanilla" icon="fa fa-bar-chart">
+                                <p:menuitem id="pm_factura" value="Facturación" icon="fa fa-home" outcome="/produccion/facturacion" />
                             </p:submenu>
                             <p:submenu id="pm_seguridad" label="Gestión de Seguridad" icon="fa fa-sitemap">
                                  <p:menuitem id="pm_usuarios" value="Usuarios" icon="fa fa-circle-o-notch" outcome="/seguridad/usuario" />
+                                 <p:menuitem id="pm_grupos" value="Grupos" icon="fa fa-circle-o-notch" outcome="/seguridad/grupos" />
+                                 <p:menuitem id="pm_permisos" value="Asignación de Permisos" icon="fa fa-circle-o-notch" outcome="/seguridad/permisos" />
                             </p:submenu>
                             <p:menuitem id="pm_ayuda" value="Ayuda" icon="fa fa-book" outcome="/docs"/>
                         </pv:menu>
