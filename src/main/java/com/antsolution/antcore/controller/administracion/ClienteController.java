@@ -1,5 +1,5 @@
 
-package com.antsolution.antcore.controller.cliente;
+package com.antsolution.antcore.controller.administracion;
 
 import com.antsolutions.antcore.ejb.ClienteFacadeLocal;
 import com.antsolutions.antcore.ejb.DepartamentoFacadeLocal;

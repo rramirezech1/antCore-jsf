@@ -1,9 +1,7 @@
 
-package com.antsolution.antcore.controller.cliente;
+package com.antsolution.antcore.controller.administracion;
 
 import com.antsolutions.antcore.ejb.EmpresaFacadeLocal;
-import com.antsolutions.antcore.ejb.SucursalFacadeLocal;
-import com.antsolutions.antcore.model.Sucursal;
 import com.antsolutions.antcore.model.Empresa;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,39 +14,34 @@ import org.primefaces.event.SelectEvent;
 
 @Named
 @ViewScoped
-public class SucursalController implements Serializable {
+public class EmpresaController implements Serializable {
     
-    private Sucursal selected;
+    private Empresa selected;
     private Boolean deshabilitado = true;
-    private List<Sucursal> listSucursal = new ArrayList();
     private List<Empresa> listEmpresa = new ArrayList();
        
     @EJB
-    private SucursalFacadeLocal sucursalEJB;
-    
-    @EJB
     private EmpresaFacadeLocal empresaEJB;
     
-    public SucursalController(){
+    public EmpresaController(){
     }
         
     @PostConstruct
     public void init(){
-        listEmpresa =  empresaEJB.findAll();  
-        buscarSucursal();
+        buscarEmpresa();
     }
     
-    public void newSucursal(){
+    public void newEmpresa(){
         deshabilitado = false;
-        selected = new Sucursal();
-        selected.setNombreSucursal("");
+        selected = new Empresa();
+        selected.setNombreEmpresa("");
     
     }
     
     public void guardar(){
         try {
-            sucursalEJB.create(selected);
-            listSucursal.add(selected);
+            empresaEJB.create(selected);
+            listEmpresa.add(selected);
             deshabilitado = true;
             selected = null;
         
@@ -59,7 +52,7 @@ public class SucursalController implements Serializable {
     
     public void modificar(){
         try {
-            sucursalEJB.edit(selected);
+            empresaEJB.edit(selected);
             deshabilitado = true;
             selected = null;
         
@@ -70,8 +63,8 @@ public class SucursalController implements Serializable {
     
     public void eliminar(){
         try {
-            sucursalEJB.remove(selected);
-            listSucursal.remove(selected);
+            empresaEJB.remove(selected);
+            listEmpresa.remove(selected);
             deshabilitado = true;
             selected = null;
         
@@ -81,26 +74,26 @@ public class SucursalController implements Serializable {
     }
     
 
-     private void buscarSucursal() {
-        listSucursal = sucursalEJB.findAll();
+     private void buscarEmpresa() {
+        listEmpresa = empresaEJB.findAll();
     }
    
 
     public void onRowSelect(SelectEvent event) {
-        selected = (Sucursal) event.getObject();
+        selected = (Empresa) event.getObject();
         deshabilitado = false;
     }
 
 
-    public Sucursal getSelected() {
+    public Empresa getSelected() {
         if (selected == null){
-            selected = new Sucursal();
+            selected = new Empresa();
         }
         return selected;
     }
 
-    public void setSelected(Sucursal selected) {
-        if (selected != null && selected.getIdSucursal() != null){
+    public void setSelected(Empresa selected) {
+        if (selected != null && selected.getIdEmpresa() != null){
             this.selected = selected;
         }
     }
@@ -113,16 +106,13 @@ public class SucursalController implements Serializable {
         this.deshabilitado = deshabilitado;
     }
 
-    public List<Sucursal> getListSucursal() {
-        return listSucursal;
-    }
-    
-    public void setListSucursal(List<Sucursal> listSucursal) {
-        this.listSucursal = listSucursal;
-    }
-    
-     public List<Empresa> getListEmpresa() {
+    public List<Empresa> getListEmpresa() {
         return listEmpresa;
     }
+
+    public void setListEmpresa(List<Empresa> listEmpresa) {
+        this.listEmpresa = listEmpresa;
+    }
+    
    
 }
