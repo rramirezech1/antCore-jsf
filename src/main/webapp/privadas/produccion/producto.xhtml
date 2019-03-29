@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/publicas/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <p:menubar id="menuProducto">  
+                        <p:menuitem value="Nuevo"  ajax="true"  action="#{catalogoProductosController.newProducto()}"
+                                    update="frm:formularioProducto" icon="fa fa-file-o"/>  
+                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{catalogoProductosController.guardar}" 
+                                    disabled="#{catalogoProductosController.deshabilitado}" update="frm:listaProductos frm:formularioProducto" />
+                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="#{catalogoProductosController.deshabilitado}" action="#{catalogoProductosController.modificar}"
+                                    update="frm:listaProductos frm:formularioProducto"/>
+                        <p:menuitem value="Eliminar" icon="fa fa-eraser" disabled="#{catalogoProductosController.deshabilitado}" action="#{catalogoProductosController.eliminar}"
+                                    update="frm:listaProductos frm:formularioProducto"/>
+                        <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
+                        <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
+
+                        <f:facet  name="options" class="centradoVertical">  
+                            <p:commandButton icon="fa fa-sign-out" value="Salir" action="#{personaController.logout}"/>
+                        </f:facet>
+                    </p:menubar> 
+                    
+                    <h3>
+                        <i class="fa fa-product-hunt" style="font-size: 16px;"></i>
+                        <p:spacer width="10" height="8"/>
+                        <p:outputLabel value="Registro de Productos" />
+                    </h3>
+
+                    <p:panelGrid id="formularioProducto" columns="2" columnClasses="col2_label,col10" 
+                                 style="width: 100%; border:0px none; background-color:transparent;"
+                                 styleClass="form-group ui-panelgrid-blank">
+                        <h:outputLabel value="Id producto:" />
+                        <p:inputText maxlength="5" value="#{catalogoProductosController.selected.idProducto}" id="idProducto" disabled="true"/>  
+                        <h:outputLabel value="Codigo:" />
+                        <p:inputText maxlength="5" value="#{catalogoProductosController.selected.codigoProducto}" id="codigoProducto" disabled="#{catalogoProductosController.deshabilitado}"/>  
+                        <h:outputLabel value="Nombre:" />
+                        <p:inputText size="70" required="true" value="#{catalogoProductosController.selected.descripcionProducto}" id="nombreProducto" disabled="#{catalogoProductosController.deshabilitado}"/>  
+                        <h:outputLabel value="Producto padre:" />
+                        <p:selectOneMenu style="width:250px" value="#{catalogoProductosController.selected.productoPadre}" id="productoPadre" disabled="#{catalogoProductosController.deshabilitado}">
+                             <f:selectItem itemLabel="Seleccione producto" itemValue="" noSelectionOption="true" />
+                             <f:selectItems value="#{catalogoProductosController.listProducto}" var="prod" itemValue="#{prod.idProducto}" itemLabel="#{prod.descripcionProducto}"/>
+                        </p:selectOneMenu>                            
+                    </p:panelGrid>
+                  
+                </div>
+                <div class="card clearfix">
+                    <h1>
+                        <i class="fa fa-list-ol verde" style="font-size: 16px;"></i>
+                        <p:spacer width="10"/>
+                        <h:outputText value="Lista de Productos"/>
+                    </h1>
+                    <p:dataTable id="listaProductos" var="entidad" value="#{catalogoProductosController.listProducto}" rowKey="#{entidad.idProducto}" 
+                                 selectionMode="single" selection="#{catalogoProductosController.selected}" scrollable="true" scrollHeight="400"> 
+
+                        <p:ajax event="rowSelect" listener="#{catalogoProductosController.onRowSelect}" update="frm:formularioProducto frm:menuProducto"/>
+                        <p:column headerText="ID" width="35">  
+                            <h:outputText value="#{entidad.idProducto}" />  
+                        </p:column>  
+
+                        <p:column headerText="Código" width="35">  
+                            <h:outputText value="#{entidad.codigoProducto}" />  
+                        </p:column>  
+
+                        <p:column headerText="Nombre" width="180">  
+                            <h:outputText value="#{entidad.descripcionProducto}" />  
+                        </p:column>  
+
+                        <p:column headerText="Producto Padre" width="150">  
+                            <h:outputText value="#{entidad.productoPadre}" />  
+                        </p:column>  
+                    </p:dataTable> 
+                </div>
+            </div>
+        </div>      
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,54 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pv="http://primefaces.org/paradise">
+    
+    <div class="layout-menu-wrapper #{guestPreferences.darkMenu ? 'layout-menu-dark' : null}">
+        <div class="nano">
+            <div class="nano-content sidebar-scroll-content">
+                <div class="layout-menu-container">
+                    <h:form id="menuform">
+                        <div class="mobile-search">
+                            <i class="fa fa-fw fa-search topbar-search-icon"></i>
+                            <input type="text" class="topbar-search" placeholder="Type your search here"/>
+                        </div>
+                        
+                        <pv:menu>
+                            <p:menuitem id="pm_inicio" value="Inicio" icon="fa fa-home" outcome="/inicio" />
+                            <p:submenu id="pm_ventas" label="Ordenes y Ventas" icon="fa fa-briefcase">
+                                <p:menuitem id="pm_orden_produccio" value="Ordenes de Producción" icon="fa fa-cogs" outcome="/privadas/produccion/orden" />
+                            </p:submenu>                           
+                            <p:submenu id="pm_ventanilla" label="Ventanilla" icon="fa fa-desktop">
+                                <p:menuitem id="pm_factura" value="Facturación" icon="fa fa-fax" outcome="/privadas/finanzas/facturacion" />
+                            </p:submenu>
+                             <p:submenu id="pm_produccion" label="Gestión de la  producción" icon="fa fa-cog">
+                                <p:menuitem id="pm_compras" value="Ordenes de Ccompra" icon="fa fa-truck" outcome="/privadas/produccion/producto" />
+                                <p:menuitem id="pm_cat_productos" value="Catalogo de producto" icon="fa fa-product-hunt" outcome="/privadas/produccion/producto" />
+                                <p:menuitem id="pm_inventario" value="Inventario de productos" icon="fa fa-clipboard" outcome="/privadas/produccion/inventario"/>
+                            </p:submenu>
+                            <p:submenu id="pm_finanzas" label="Finanzas" icon="fa fa-line-chart">
+                                <p:menuitem id="pm_cxc" value="Cuentras por Cobrar" icon="fa fa-cc" outcome="/privadas/finanzas/cuentasCobrar" />
+                                <p:menuitem id="pm_credito" value="Gestion de Creditos" icon="fa fa-dollar" outcome="/privadas/finanzas/credito" />
+                            </p:submenu>
+                            <p:submenu id="pm_clientes" label="Gestión de clientes" icon="fa fa-address-book-o">
+                                <p:menuitem id="pm_empresa" value="Empresas" icon="fa fa-university blue" outcome="/privadas/administracion/cliente/empresa" />
+                                <p:menuitem id="pm_sucursal" value="Sucursales" icon="fa fa-home" outcome="/privadas/administracion/cliente/sucursal" />
+                                <p:menuitem id="pm_cliente" value="Clientes" icon="fa fa-users" outcome="/privadas/administracion/cliente/cliente" />
+                            </p:submenu>    
+                            <p:submenu id="pm_seguridad" label="Gestión de Seguridad" icon="fa fa-sitemap">
+                                 <p:menuitem id="pm_usuarios" value="Usuarios" icon="fa fa-user" outcome="/privadas/administracion/seguridad/usuario" />
+                                 <p:menuitem id="pm_grupos" value="Grupos" icon="fa fa-users" outcome="/privadas/administracion/seguridad/grupos" />
+                                 <p:menuitem id="pm_permisos" value="Asignación de Permisos" icon="fa fa-lock" outcome="/privadas/administracion/seguridad/permisos" />
+                            </p:submenu>
+                            <p:menuitem id="pm_ayuda" value="Ayuda" icon="fa fa-book" outcome="/publicas/docs"/>
+                        </pv:menu>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ui:composition>
