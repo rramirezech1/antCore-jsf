@@ -3,14 +3,14 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+                template="/publicas/template.xhtml">
 
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="card">
                     <p:menubar>  
-                        <p:menuitem value="Nuevo"  ajax="true"  action="#{usuarioSeguridadController.newUsuarioSeguridad}"
+                        <p:menuitem value="Nuevo"  ajax="true"  action="#{grupoSeguridadController.newUsuarioSeguridad}"
                                     update="frm:formularioUsuario" icon="fa fa-file-o"/>  
                         <p:menuitem value="Guardar" icon="fa fa-save" action="#{usuarioSeguridadController.guardar}" 
                                     disabled="false" update="frm:listaUsuarios frm:formularioUsuario" />
