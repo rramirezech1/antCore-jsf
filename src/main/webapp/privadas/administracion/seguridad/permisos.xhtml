@@ -10,14 +10,14 @@
             <div class="ui-g-12">
                 <div class="card">
                     <p:menubar>  
-                        <p:menuitem value="Nuevo"  ajax="true"  action="#{usuarioSeguridadController.newUsuarioSeguridad}"
-                                    update="frm:formularioUsuario" icon="fa fa-file-o"/>  
-                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{usuarioSeguridadController.guardar}" 
-                                    disabled="false" update="frm:listaUsuarios frm:formularioUsuario" />
-                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="false" action="#{usuarioSeguridadController.modificar}"
-                                    update="frm:listaUsuarios frm:formularioUsuario"/>
-                        <p:menuitem value="Eliminar" icon="fa fa-eraser" disabled="false" action="#{usuarioSeguridadControlle.eliminar}"
-                                    update="frm:listaUsuarios frm:formularioUsuario"/>                        
+                        <p:menuitem value="Nuevo"  ajax="true"  action="#{permisosSeguridadController.newUsuarioGrupoSeguridad}"
+                                    update="frm:formularioPermiso" icon="fa fa-file-o"/>  
+                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{permisosSeguridadController.guardar}" 
+                                    disabled="false" update="frm:listaPermisos frm:formularioPermiso" />
+                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="false" action="#{permisosSeguridadController.modificar}"
+                                    update="frm:listaPermisos frm:formularioPermiso"/>
+                        <p:menuitem value="Eliminar" icon="fa fa-eraser" disabled="false" action="#{permisosSeguridadController.eliminar}"
+                                    update="frm:listaPermisos frm:formularioPermiso"/>                        
                         <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
                         <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
 
@@ -27,26 +27,26 @@
                     </p:menubar> 
                     
                     <h3>
-                        <i class="fa fa-user-circle-o" style="font-size: 16px;"></i>
+                        <i class="fa fa-lock" style="font-size: 16px;"></i>
                         <p:spacer width="10" height="8"/>
-                        <p:outputLabel value="Registro de Usuarios" />
+                        <p:outputLabel value="Registro de Permisos" />
                     </h3>
 
-                    <p:panelGrid id="formularioUsuario" columns="2" columnClasses="col2_label,col10" 
+                    <p:panelGrid id="formularioPermiso" columns="2" columnClasses="col2_label,col10" 
                                  style="width: 100%; border:0px none; background-color:transparent;"
                                  styleClass="form-group ui-panelgrid-blank">
-                        <h:outputLabel value="Código:" for="idUsuario"/>
-                        <p:inputText maxlength="5" value="#{usuarioSeguridadController.selected.idUsuario}" id="idUsuario" disabled="true"/>  
-                        <h:outputLabel value="Nombre:" for="nombreUsuario"/>
-                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.nombreUsuario}" id="nombreUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
-                        <h:outputLabel value="Apellido:" for="apellidoUsuario"/>
-                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.apellidoUsuario}" id="apellidoUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
-                        <h:outputLabel value="Usuario:" for="usuarioLogin"/>
-                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.usuarioLogin}" id="usuarioLogin" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
-                        <h:outputLabel value="Contraseña:" for="usuarioPassword1"/>
-                        <p:password size="50" required="true" value="#{usuarioSeguridadController.selected.usuarioPassword}" id="usuarioPassword1" disabled="#{usuarioSeguridadController.deshabilitado}" match="usuarioPassword2" feedback="true"/>  
-                        <h:outputLabel value="Repetir Contraseña:" for="usuarioPassword2"/>
-                        <p:password size="50" required="true"  id="usuarioPassword2" disabled="#{usuarioSeguridadController.deshabilitado}" feedback="true"/>  
+                        <h:outputLabel value="Código:" for="idPermiso"/>
+                        <p:inputText maxlength="5" value="#{permisosSeguridadController.selected.idUsuarioGrupo}" id="idPermiso" disabled="true"/>  
+                        <h:outputLabel value="Usuario"/>
+                        <p:selectOneMenu style="width:300px" id="idSeguridadUsuario" disabled="#{permisosSeguridadController.deshabilitado}" value="#{permisosSeguridadController.selected.idUsuario}">
+                             <f:selectItem itemLabel="Seleccione Usuario" itemValue="" noSelectionOption="true" />
+                             <f:selectItems value="#{permisosSeguridadController.listUsuarioSeguridad}" var="usuario" itemValue="#{usuario.idUsuario}" itemLabel="#{usuario.nombreUsuario} #{usuario.apellidoUsuario}" />
+                        </p:selectOneMenu>   
+                        <h:outputLabel value="Grupo"/>
+                        <p:selectOneMenu style="width:300px" id="idSeguridadGrupo" disabled="#{permisosSeguridadController.deshabilitado}">
+                             <f:selectItem itemLabel="Seleccione Grupo" itemValue="" noSelectionOption="true" />
+                             <f:selectItems value="#{permisosSeguridadController.listGrupoSeguridad}" var="grupo" itemValue="#{grupo.idGrupo}" itemLabel="#{grupo.nombreGrupo}" />
+                        </p:selectOneMenu>     
                     </p:panelGrid>
                   
                 </div>
@@ -54,28 +54,23 @@
                     <h1>
                         <i class="fa fa-list-ol verde" style="font-size: 16px;"></i>
                         <p:spacer width="10"/>
-                        <h:outputText value="Lista de Usuarios"/>
+                        <h:outputText value="Lista de Permisos"/>
                     </h1>
-                    <p:dataTable id="listaUsuarios" var="entidad" value="#{usuarioSeguridadController.listUsuarioSeguridad}" rowKey="#{entidad.idUsuario}" 
-                                 selectionMode="single" selection="#{usuarioSeguridadController.selected}" scrollable="true" scrollHeight="400"> 
+                    <p:dataTable id="listaPermisos" var="entidad" value="#{permisosSeguridadController.listUsuarioGrupoSeguridad}" rowKey="#{entidad.idUsuarioGrupo}" 
+                                 selectionMode="single" selection="#{permisosSeguridadController.selected}" scrollable="true" scrollHeight="400"> 
 
-                        <p:ajax event="rowSelect" listener="#{usuarioSeguridadController.onRowSelect}" update="frm:formularioUsuario" />
+                        <p:ajax event="rowSelect" listener="#{permisosSeguridadController.onRowSelect}" update="frm:formularioPermiso" />
                         <p:column headerText="Código" width="35">  
-                            <h:outputText value="#{entidad.idUsuario}" />  
-                        </p:column>  
-
-                        <p:column headerText="Nombre" width="50">  
-                            <h:outputText value="#{entidad.nombreUsuario}" />  
-                        </p:column>  
-                        
-                        <p:column headerText="Apellido" width="50">  
-                            <h:outputText value="#{entidad.apellidoUsuario}" />  
+                            <h:outputText value="#{entidad.idUsuarioGrupo}" />  
                         </p:column>  
 
                         <p:column headerText="Usuario" width="50">  
-                            <h:outputText value="#{entidad.usuarioLogin}" />  
+                            <h:outputText value="#{entidad.idUsuario.nombreUsuario} #{entidad.idUsuario.apellidoUsuario}" />  
                         </p:column>  
-
+                        
+                        <p:column headerText="Grupo" width="50">  
+                            <h:outputText value="#{entidad.idGrupo.nombreGrupo}" />  
+                        </p:column>  
                     </p:dataTable> 
                 </div>
             </div>
