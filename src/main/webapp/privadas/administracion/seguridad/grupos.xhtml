@@ -3,18 +3,18 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+                template="/publicas/template.xhtml">
 
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="card">
                     <p:menubar>  
-                        <p:menuitem value="Nuevo"  ajax="true"  action="#{usuarioSeguridadController.newUsuarioSeguridad}"
-                                    update="frm:formularioUsuario" icon="fa fa-file-o"/>  
+                        <p:menuitem value="Nuevo"  ajax="true"  action="#{grupoSeguridadController.newGrupoSeguridad}"
+                                    update="frm:formularioGrupo" icon="fa fa-file-o"/>  
                         <p:menuitem value="Modificar" icon="fa fa-edit" disabled="true"/>
-                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{usuarioSeguridadController.guardar}" 
-                                    disabled="false" update="frm:listaUsuarios frm:formularioUsuario" />
+                        <p:menuitem value="Guardar" icon="fa fa-save" action="#{grupoSeguridadController.guardar}" 
+                                    disabled="false" update="frm:listaGrupos frm:formularioGrupo" />
                         <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
                         <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
 
@@ -29,21 +29,15 @@
                         <p:outputLabel value="Registro de Usuarios" />
                     </h3>
 
-                    <p:panelGrid id="formularioUsuario" columns="2" columnClasses="col2_label,col10" 
+                    <p:panelGrid id="formularioGrupo" columns="2" columnClasses="col2_label,col10" 
                                  style="width: 100%; border:0px none; background-color:transparent;"
                                  styleClass="form-group ui-panelgrid-blank">
-                        <h:outputLabel value="Código:" for="idUsuario"/>
-                        <p:inputText maxlength="5" required="true" value="#{usuarioSeguridadController.selected.idUsuario}" id="idUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
-                        <h:outputLabel value="Nombre:" for="nombreUsuario"/>
-                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.nombreUsuario}" id="nombreUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
-                        <h:outputLabel value="Apellido:" for="apellidoUsuario"/>
-                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.apellidoUsuario}" id="apellidoUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
-                        <h:outputLabel value="Usuario:" for="usuarioLogin"/>
-                        <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.usuarioLogin}" id="usuarioLogin" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
-                        <h:outputLabel value="Contraseña:" for="usuarioPassword1"/>
-                        <p:password size="50" required="true" value="#{usuarioSeguridadController.selected.usuarioPassword}" id="usuarioPassword1" disabled="#{usuarioSeguridadController.deshabilitado}" match="usuarioPassword2" feedback="true"/>  
-                        <h:outputLabel value="Repetir Contraseña:" for="usuarioPassword2"/>
-                        <p:password size="50" required="true"  id="usuarioPassword2" disabled="#{usuarioSeguridadController.deshabilitado}" feedback="true"/>  
+                        <h:outputLabel value="Código:" for="idGrupo"/>
+                        <p:inputText maxlength="5" required="true" value="#{grupoSeguridadController.selected.idGrupo}" id="idGrupo" disabled="true"/>  
+                        <h:outputLabel value="Codigo:" for="codigoGrupo"/>
+                        <p:inputText size="70" required="true" value="#{grupoSeguridadController.selected.codigoGrupo}" id="codigoGrupo" disabled="#{grupoSeguridadController.deshabilitado}"/>  
+                        <h:outputLabel value="Nombre:" for="nombreGrupo"/>
+                        <p:inputText size="70" required="true" value="#{grupoSeguridadController.selected.nombreGrupo}" id="nombreGrupo" disabled="#{grupoSeguridadController.deshabilitado}"/> 
                     </p:panelGrid>
                   
                 </div>
@@ -51,28 +45,23 @@
                     <h1>
                         <i class="fa fa-list-ol verde" style="font-size: 16px;"></i>
                         <p:spacer width="10"/>
-                        <h:outputText value="Lista de Usuarios"/>
+                        <h:outputText value="Lista de Grupos"/>
                     </h1>
-                    <p:dataTable id="listaUsuarios" var="entidad" value="#{usuarioSeguridadController.listUsuarioSeguridad}" rowKey="#{entidad.idUsuario}" 
-                                 selectionMode="single" selection="#{usuarioSeguridadController.selected}" scrollable="true" scrollHeight="400"> 
+                    <p:dataTable id="listaGrupos" var="entidad" value="#{grupoSeguridadController.listGrupoSeguridad}" rowKey="#{entidad.idGrupo}" 
+                                 selectionMode="single" selection="#{grupoSeguridadController.selected}" scrollable="true" scrollHeight="400"> 
 
-                        <p:ajax event="rowSelect" listener="#{usuarioSeguridadController.onRowSelect}" update="frm:formularioUsuario" />
+                        <p:ajax event="rowSelect" listener="#{grupoSeguridadController.onRowSelect}" update="frm:formularioGrupo" />
+                        <p:column headerText="Id" width="35">  
+                            <h:outputText value="#{entidad.idGrupo}" />  
+                        </p:column>  
+                       
                         <p:column headerText="Código" width="35">  
-                            <h:outputText value="#{entidad.idUsuario}" />  
+                            <h:outputText value="#{entidad.codigoGrupo}" />  
                         </p:column>  
 
                         <p:column headerText="Nombre" width="50">  
-                            <h:outputText value="#{entidad.nombreUsuario}" />  
+                            <h:outputText value="#{entidad.nombreGrupo}" />  
                         </p:column>  
-                        
-                        <p:column headerText="Apellido" width="50">  
-                            <h:outputText value="#{entidad.apellidoUsuario}" />  
-                        </p:column>  
-
-                        <p:column headerText="Usuario" width="50">  
-                            <h:outputText value="#{entidad.usuarioLogin}" />  
-                        </p:column>  
-
                     </p:dataTable> 
                 </div>
             </div>
