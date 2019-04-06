@@ -3,21 +3,18 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="/publicas/template.xhtml">
+                template="/WEB-INF/template.xhtml">
 
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12">
                 <div class="card">
                     <p:menubar>  
-                        <p:menuitem value="Nuevo"  ajax="true"  action="#{grupoSeguridadController.newUsuarioSeguridad}"
+                        <p:menuitem value="Nuevo"  ajax="true"  action="#{usuarioSeguridadController.newUsuarioSeguridad}"
                                     update="frm:formularioUsuario" icon="fa fa-file-o"/>  
+                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="true"/>
                         <p:menuitem value="Guardar" icon="fa fa-save" action="#{usuarioSeguridadController.guardar}" 
                                     disabled="false" update="frm:listaUsuarios frm:formularioUsuario" />
-                        <p:menuitem value="Modificar" icon="fa fa-edit" disabled="false" action="#{usuarioSeguridadController.modificar}"
-                                    update="frm:listaUsuarios frm:formularioUsuario"/>
-                        <p:menuitem value="Eliminar" icon="fa fa-eraser" disabled="false" action="#{usuarioSeguridadControlle.eliminar}"
-                                    update="frm:listaUsuarios frm:formularioUsuario"/>                        
                         <p:menuitem value="Imprimir" icon="fa fa-print" disabled="true" />
                         <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
 
@@ -27,7 +24,7 @@
                     </p:menubar> 
                     
                     <h3>
-                        <i class="fa fa-user-circle-o" style="font-size: 16px;"></i>
+                        <i class="fa fa-university blue" style="font-size: 16px;"></i>
                         <p:spacer width="10" height="8"/>
                         <p:outputLabel value="Registro de Usuarios" />
                     </h3>
@@ -36,7 +33,7 @@
                                  style="width: 100%; border:0px none; background-color:transparent;"
                                  styleClass="form-group ui-panelgrid-blank">
                         <h:outputLabel value="Código:" for="idUsuario"/>
-                        <p:inputText maxlength="5" value="#{usuarioSeguridadController.selected.idUsuario}" id="idUsuario" disabled="true"/>  
+                        <p:inputText maxlength="5" required="true" value="#{usuarioSeguridadController.selected.idUsuario}" id="idUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
                         <h:outputLabel value="Nombre:" for="nombreUsuario"/>
                         <p:inputText size="70" required="true" value="#{usuarioSeguridadController.selected.nombreUsuario}" id="nombreUsuario" disabled="#{usuarioSeguridadController.deshabilitado}"/>  
                         <h:outputLabel value="Apellido:" for="apellidoUsuario"/>
