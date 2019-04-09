@@ -97,7 +97,7 @@ public class ClienteController implements Serializable {
     }
      
     public void onDeptoChange() {
-         listMunicipio = municipioEJB.findAll();
+         listMunicipio = municipioEJB.findByDepartamento(selected.getIdDepartamento());
     }
     
     

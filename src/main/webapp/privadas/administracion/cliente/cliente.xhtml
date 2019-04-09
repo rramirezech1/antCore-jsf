@@ -52,10 +52,10 @@
                              <f:selectItems value="#{clienteController.listPais}" var="pais" itemValue="#{pais.idPais}" itemLabel="#{pais.nombrePais}" />
                         </p:selectOneMenu>   
                         <h:outputLabel value="Departamento"/>
-                        <p:selectOneMenu style="width:300px" id="idDepartamentoCliente" disabled="#{clienteController.deshabilitado}">
+                        <p:selectOneMenu style="width:300px" id="idDepartamentoCliente" disabled="#{clienteController.deshabilitado}" value="#{clienteController.selected.idDepartamento.idDepartamento}">
                              <f:selectItem itemLabel="Seleccione Departamento" itemValue="" noSelectionOption="true" />
                              <f:selectItems value="#{clienteController.listDepartamento}" var="depto" itemValue="#{depto.idDepartamento}" itemLabel="#{depto.nombreDepartamento}" />
-                             <p:ajax listener="#{clienteController.onDeptoChange()}" update="idMunicipioCliente" />
+                             <p:ajax listener="#{clienteController.onDeptoChange}" update="idMunicipioCliente" />
                         </p:selectOneMenu>   
                         <h:outputLabel value="Municipio"/>
                         <p:selectOneMenu style="width:300px" value="#{clienteController.selected.idMuncipio}" id="idMunicipioCliente" disabled="#{clienteController.deshabilitado}">
