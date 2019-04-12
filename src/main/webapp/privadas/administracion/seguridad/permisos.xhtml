@@ -38,12 +38,14 @@
                         <h:outputLabel value="Código:" for="idPermiso"/>
                         <p:inputText maxlength="5" value="#{permisosSeguridadController.selected.idUsuarioGrupo}" id="idPermiso" disabled="true"/>  
                         <h:outputLabel value="Usuario"/>
-                        <p:selectOneMenu style="width:300px" id="idSeguridadUsuario" disabled="#{permisosSeguridadController.deshabilitado}" value="#{permisosSeguridadController.selected.idUsuario}">
+                        <p:selectOneMenu id="idSeguridadUsuario" disabled="#{permisosSeguridadController.deshabilitado}" 
+                                         value="#{permisosSeguridadController.selected.idUsuario.idUsuario}">
                              <f:selectItem itemLabel="Seleccione Usuario" itemValue="" noSelectionOption="true" />
                              <f:selectItems value="#{permisosSeguridadController.listUsuarioSeguridad}" var="usuario" itemValue="#{usuario.idUsuario}" itemLabel="#{usuario.nombreUsuario} #{usuario.apellidoUsuario}" />
                         </p:selectOneMenu>   
                         <h:outputLabel value="Grupo"/>
-                        <p:selectOneMenu style="width:300px" id="idSeguridadGrupo" disabled="#{permisosSeguridadController.deshabilitado}">
+                        <p:selectOneMenu id="idSeguridadGrupo" disabled="#{permisosSeguridadController.deshabilitado}"
+                                         value="#{permisosSeguridadController.selected.idGrupo.idGrupo}">
                              <f:selectItem itemLabel="Seleccione Grupo" itemValue="" noSelectionOption="true" />
                              <f:selectItems value="#{permisosSeguridadController.listGrupoSeguridad}" var="grupo" itemValue="#{grupo.idGrupo}" itemLabel="#{grupo.nombreGrupo}" />
                         </p:selectOneMenu>     
