@@ -112,7 +112,7 @@
         <auth-method>FORM</auth-method>
         <realm-name>seguridadJaas</realm-name>
         <form-login-config>
-            <form-login-page>inicio.xhtml</form-login-page> 
+            <form-login-page>/inicio.jsf?faces-redirect=true</form-login-page> 
             <form-error-page>error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
