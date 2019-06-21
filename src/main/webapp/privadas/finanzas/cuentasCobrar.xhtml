@@ -22,7 +22,14 @@
                         <p:menuitem value="Principal" icon="fa fa-home" outcome="/inicio"/>
 
                         <f:facet  name="options" class="centradoVertical">  
-                            <p:commandButton icon="fa fa-sign-out" value="Salir" action="#{personaController.logout}"/>
+                            <p:growl id="message" showDetail="true" />
+                            <p:commandButton icon="fa fa-sign-out" value="Salir" action="#{usuarioSeguridadController.logout}">    
+                                <p:confirm header="Confirmación" message="¿Esta Seguro de salir del sistema?" icon="pi pi-exclamation-triangle" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                            </p:confirmDialog>    
                         </f:facet>
                     </p:menubar> 
                     
